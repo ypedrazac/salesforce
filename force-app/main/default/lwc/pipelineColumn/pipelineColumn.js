@@ -1,5 +1,6 @@
 import { LightningElement, wire, track, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { deleteRecord } from 'lightning/uiRecordApi';
 import { NavigationMixin, CurrentPageReference } from "lightning/navigation";
 import getTodosByType from "@salesforce/apex/toDo.getTodosByType";
 
@@ -135,4 +136,30 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   handleClick() {
     this.form = true;
   }
+
+  handleRemoveItem(event){
+        // passing account id to delete record
+        // recordId is required value
+        console.log(event.detail);
+        deleteRecord(event.detail)
+        .then(result => {
+            window.console.log('result ====> '+result);
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Success!!',
+                message: 'To Do Deleted Successfully!!',
+                variant: 'success'
+            }),);
+
+            //delete element from array
+            this.todos.splice(this.todos.findIndex(i => i.value.Id === event.detail), 1);
+        })
+        .catch(error => {
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Error!!',
+                message: JSON.stringify(error),
+                variant: 'error'
+            }),);
+        })
+    }
+  
 }

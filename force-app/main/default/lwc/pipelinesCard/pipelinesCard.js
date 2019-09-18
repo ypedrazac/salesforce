@@ -1,5 +1,4 @@
-import { LightningElement, api, track, wire } from 'lwc';
-import getTodosGroupedByType from "@salesforce/apex/toDo.getTodosGroupedByType";
+import { LightningElement, api, track } from 'lwc';
 export default class PipelinesCard extends LightningElement {
     @track title;
     @track numbers=[];
@@ -15,18 +14,6 @@ export default class PipelinesCard extends LightningElement {
       this.template.querySelector('c-pipeline-column').handleColumn(this.numbers);
     }
     
-  @wire(getTodosGroupedByType)
-  wiredGResult(groupedResult){
-    if(groupedResult.data){
-        
-        this.todos = groupedResult.data.map(task => {
-            return { value: task, type: task.Type__c };
-          });
-          console.log("HIIIII from Pipelines Card " + JSON.stringify(this.todos));
-    }
-    let o= this.groupBy(this.todos, 'type');
-    console.log("GROUPED: "+ JSON.stringify(o.todo));
-  }
 
   groupBy(arr, property) {
     return arr.reduce(function(memo, x) {

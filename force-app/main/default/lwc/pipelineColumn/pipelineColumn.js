@@ -16,12 +16,10 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
 
   @wire(getTodosByType, { type: "$type" })
   wiredResult(result) {
-    //var conts, key;
     if (result.data) {
       this.todos = result.data.map(task => {
         return { value: task, type: task.Type__c };
       });
-      console.log("HIIIII " + JSON.stringify(this.todos));
     }
   }
 
@@ -32,10 +30,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
     for (i = 0; i < numbers.length; i++) {
       this.number = numbers[i];
     }
-  }
-
-  init() {
-
   }
 
   
@@ -92,13 +86,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   }
   handleCancel() {
     this.form = false;
-  }
-  handleLoad() {
-    //var eventFields = event.getParam("fields");
-    //console.log(JSON.stringify(event.detail.fields));
-    //console.log(event.getParam("fields"));
-    // eslint-disable-next-line dot-notation
-    //eventFields["Type__c"] =this.type;
   }
 
   handleSubmit(event) {

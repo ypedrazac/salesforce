@@ -1,0 +1,15 @@
+.todo-tile {
+    border: 1px solid #171f2c;
+    border-radius: .25rem;
+    display: block;
+    
+    
+}    
+.todo-color{
+    background-color: rgb(197, 201, 216)
+    
+   
+}
+.todo-width{
+    width: 100%
+}

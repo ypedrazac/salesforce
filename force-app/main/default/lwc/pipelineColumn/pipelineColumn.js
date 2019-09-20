@@ -8,7 +8,7 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   @track type;
   @track form = false;
   @track number;
-  @track todoList;
+  @track titlelist= [];
   @track todos = [];
   @track itemId;
   @track targetId;
@@ -73,7 +73,14 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   console.log("Source: "+ this.itemId +" "+ sourceIndex);
   console.log("Target: "+ this.targetId +" "+ targetIndex);
   }
-
+/*      if(this.titlelist.indexOf(event.target.value) > -1){
+        console.log('In array');
+        this.dispatchEvent(new ShowToastEvent({
+          title: 'Error!!',
+          message: 'Title already in column!',
+          variant: 'error'
+      }),);
+      } */
   handleFocusOut(event) {
     if (event.target.value) {
       this.template.querySelector("lightning-input").disabled = true;
@@ -135,6 +142,7 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
 
   handleClick() {
     this.form = true;
+
   }
 
   handleRemoveItem(event){
@@ -161,5 +169,27 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
             }),);
         })
     }
-  
+
+    handleCompleteItem(event){
+      console.log(event.detail);
+      
+      
+      console.log(JSON.stringify(this.todos));
+      //let sourceIndex=  this.todos.findIndex(i => i.value.Id === this.itemId);
+      //this.todos.find(todo => todo.value.Id === event.detail).value.Title__c = 'Completed';
+      let obj= this.todos.find(todo => todo.value.Id === event.detail);
+      const returnedTarget = Object.assign({}, obj);
+      returnedTarget.value.Title__c = 'Completed';
+      console.log(returnedTarget.value.Title__c);
+      console.log(JSON.stringify(returnedTarget));
+      //this.todos[sourceIndex].value.Title__c = "Completed";
+      for (let i in this.todos) {
+        if (this.todos[i].value.Id === event.detail) {
+         
+          //this.todos[i].value.Title__c = "Completed";
+          console.log(this.todos[i].value.Title__c);
+           break; //Stop this loop, we found it!
+        }
+      }
+    } 
 }

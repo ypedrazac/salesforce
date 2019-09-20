@@ -3,7 +3,7 @@
     <div class="slds-grid slds-wrap ">
       <template for:each={numbers} for:item="number">
         <div id={number} key={number}  class="slds-col slds-size_1-of-7 slds-box" style="margin-left:0.5em">
-          <c-pipeline-column id={number}></c-pipeline-column>
+          <c-pipeline-column id={number} titlelist={titleList}></c-pipeline-column>
         </div>
       </template>
     </div>

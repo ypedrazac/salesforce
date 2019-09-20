@@ -2,52 +2,51 @@
   <!-- Start todo list -->
 
   <template if:true={todo}>
-
     <lightning-layout multiple-rows="true" pull-to-boundary="large">
-    
-      <div
-        draggable="true"
-        ondragstart={handleDragStart}
-        class="todo-width"
-       
-      >
+      <div draggable="true" ondragstart={handleDragStart} class="todo-width">
         <lightning-layout-item padding="around-small">
-          
-            <!-- Start todo tile -->
-            <lightning-card
-              title={todo.value.Title__c}
-              class="todo-color todo-tile"
-               padding="around-small"
-              
-            >
+          <!-- Start todo tile -->
+          <lightning-card
+            title={todo.value.Title__c}
+            class="todo-color todo-tile"
+            padding="around-small"
+          >
+            <div class="slds-media__body slds-p-horizontal_small todo-color">
+              <p class="slds-m-bottom_xx-small todo-color">
+                {todo.value.Description__c}
+              </p>
+              <p class="slds-m-bottom_xx-small todo-color">
+                {todo.value.Status__c}
+              </p>
+              <p class="slds-m-bottom_xx-small todo-color">
+                {todo.value.Type__c}
+              </p>
+            </div>
+          </lightning-card>
 
-                  <div class="slds-media__body slds-p-horizontal_small todo-color">
-                    <p class="slds-m-bottom_xx-small todo-color">
-                      {todo.value.Description__c}
-                    </p>
-                    <p class="slds-m-bottom_xx-small todo-color">
-                      {todo.value.Status__c}
-                    </p>
-                    <p class="slds-m-bottom_xx-small todo-color">
-                      {todo.value.Type__c}
-                    </p>
-                  </div>
-
-            </lightning-card>
-          
           <!-- End todo tile -->
         </lightning-layout-item>
       </div>
       <!--  </template> -->
+      <lightning-button
+        variant="destructive"
+        label="Delete"
+        onclick={handleRemoveElement}
+        class="slds-m-left_x-small"
+      ></lightning-button>
+      <template if:true={isRemoved}>
+         
+        <lightning-button-icon
+        variant="border-filled"
+          icon-name="utility:check"
+          alternative-text="Save"
+          class="slds-m-left_xx-small"
+          onclick={handleComplete}
+        ></lightning-button-icon>
       
+      </template>
     </lightning-layout>
-    <lightning-button
-    variant="destructive"
-    label="Delete"
-    onclick={handleRemoveElement}
-    class="slds-m-left_x-small"
-  ></lightning-button>
-   
+
     <!--</div>-->
   </template>
 </template>

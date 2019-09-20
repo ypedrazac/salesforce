@@ -12,24 +12,32 @@ export default class TodoCard extends NavigationMixin(LightningElement) {
    return (this.todo);
 }
 
-handleRemoveElement(){
-  const evt = new CustomEvent('itemdelete',{
+
+createEvent(name){
+  const evt = new CustomEvent(name,{
     detail: this.todo.value.Id
   })
 
   this.dispatchEvent(evt);
 }
 
-handleDragStart() {
-  const evt = new CustomEvent('itemdragstart', {
-    
-    detail: this.todo.value.Id
-});
-
-this.dispatchEvent(evt);
+handleRemoveElement(){
+  this.createEvent('itemdelete');
 }
 
-//handleDrop(){}
+handleDragStart() {
+this.createEvent('itemdragstart');
+}
+
+handleComplete(){
+  this.createEvent('itemcomplete');
+}
+get isRemoved(){
+  if(this.todo.value.Status__c === 'Deleted')
+      return true;
+  return false;
+} 
+
 
 
 

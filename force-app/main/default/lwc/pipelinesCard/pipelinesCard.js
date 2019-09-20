@@ -3,6 +3,7 @@ export default class PipelinesCard extends LightningElement {
     @track title;
     @track numbers=[];
     @track todos= [];
+    @track titlelist= [];
     @api
     pipelineHandler(pipelinesAmount) {
      var i;

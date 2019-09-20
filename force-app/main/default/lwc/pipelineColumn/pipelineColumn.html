@@ -16,7 +16,7 @@
         ></lightning-input>
       </span>
       <template for:each={todos} for:item="todo" >
-        <c-todo-card id={todo.value.Id}  key={todo.value.Id} todo={todo} class="slds-card" onitemdragstart={handleItemDrag} ondragover={allowDrop} ondrop={handleItemDrop} onitemdelete={handleRemoveItem} ></c-todo-card>
+        <c-todo-card id={todo.value.Id}  key={todo.value.Id} todo={todo} class="slds-card" onitemdragstart={handleItemDrag} ondragover={allowDrop} ondrop={handleItemDrop} onitemdelete={handleRemoveItem} onitemcomplete={handleCompleteItem}></c-todo-card>
       </template>
       <template if:true={error}>
         <div class="slds-text-color_error">
@@ -77,7 +77,6 @@
               onsuccess={handleSuccess}
               oncancel={handleCancel}
               onsubmit={handleSubmit}
-              onload={handleLoad}
             >
             </lightning-record-form>
           </div>

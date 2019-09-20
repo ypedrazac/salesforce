@@ -31,7 +31,6 @@ export default class TodosApp extends LightningElement {
       this.showErrorToast();
     } else {
       event.preventDefault();
-      console.log(pipelinesAmount);
       this.template.querySelector("lightning-button").disabled = true;
       this.template
         .querySelector("c-pipelines-card")

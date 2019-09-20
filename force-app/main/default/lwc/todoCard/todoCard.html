@@ -27,7 +27,7 @@
           <!-- End todo tile -->
         </lightning-layout-item>
       </div>
-      <!--  </template> -->
+
       <lightning-button
         variant="destructive"
         label="Delete"
@@ -35,18 +35,14 @@
         class="slds-m-left_x-small"
       ></lightning-button>
       <template if:true={isRemoved}>
-         
         <lightning-button-icon
-        variant="border-filled"
+          variant="border-filled"
           icon-name="utility:check"
           alternative-text="Save"
           class="slds-m-left_xx-small"
           onclick={handleComplete}
         ></lightning-button-icon>
-      
       </template>
     </lightning-layout>
-
-    <!--</div>-->
   </template>
 </template>

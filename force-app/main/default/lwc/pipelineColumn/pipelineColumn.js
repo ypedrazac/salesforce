@@ -27,7 +27,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   @api
   handleColumn(numbers) {
     var i;
-    console.log(numbers);
     for (i = 0; i < numbers.length; i++) {
       this.number = numbers[i];
     }
@@ -36,7 +35,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   
   handleItemDrag(event) {
     event.preventDefault();
-    console.log("TO PARENT: " + event.detail);
     this.itemId = event.detail;
   }
   allowDrop(event){
@@ -44,7 +42,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
    }
 
   handleItemDrop(event) {
-    console.log(" RUN ------ handleItemDrop");
     event.preventDefault();
     let array = this.template
       .querySelector(".slds-card")
@@ -60,27 +57,11 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
         this.template.querySelector(`#${this.itemId + suffix}`),
         this.template.querySelector(`#${this.targetId + suffix}`).nextSibling
       );
-      console.log("List of todos: " + JSON.stringify(this.todos));
-    console.log(" END ------ handleItemDrop");
     this.reorderList();
     
   }
 
-  reorderList(){
-  let sourceIndex=  this.todos.findIndex(i => i.value.Id === this.itemId);
-  let targetIndex=  this.todos.findIndex(i => i.value.Id === this.targetId);
 
-  console.log("Source: "+ this.itemId +" "+ sourceIndex);
-  console.log("Target: "+ this.targetId +" "+ targetIndex);
-  }
-/*      if(this.titlelist.indexOf(event.target.value) > -1){
-        console.log('In array');
-        this.dispatchEvent(new ShowToastEvent({
-          title: 'Error!!',
-          message: 'Title already in column!',
-          variant: 'error'
-      }),);
-      } */
   handleFocusOut(event) {
     if (event.target.value) {
       this.template.querySelector("lightning-input").disabled = true;
@@ -110,8 +91,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   }
 
   handleSuccess(event) {
-    console.log("Record iD" + event.detail.id);
-
     const newTodo = {
       value: {
         Id: event.detail.id,
@@ -122,7 +101,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
       },
       type: event.detail.fields.Title__c.value
     };
-    console.log(newTodo);
 
     const evt = new ShowToastEvent({
       title: "Account created",
@@ -148,7 +126,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
   handleRemoveItem(event){
         // passing account id to delete record
         // recordId is required value
-        console.log(event.detail);
         deleteRecord(event.detail)
         .then(result => {
             window.console.log('result ====> '+result);
@@ -171,10 +148,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
     }
 
     handleCompleteItem(event){
-      console.log(event.detail);
-      
-      
-      console.log(JSON.stringify(this.todos));
       //let sourceIndex=  this.todos.findIndex(i => i.value.Id === this.itemId);
       //this.todos.find(todo => todo.value.Id === event.detail).value.Title__c = 'Completed';
       let obj= this.todos.find(todo => todo.value.Id === event.detail);

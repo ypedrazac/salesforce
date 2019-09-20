@@ -70,7 +70,6 @@ export default class PipelineColumn extends NavigationMixin(LightningElement) {
 
   handleTypeChange(event) {
     this.type = event.target.value;
-    console.log(this.type);
     this.currTypeNumber = event.target.id;
   }
   handleCancel() {

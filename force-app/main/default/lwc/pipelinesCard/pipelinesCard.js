@@ -8,7 +8,6 @@ export default class PipelinesCard extends LightningElement {
   pipelineHandler(pipelinesAmount) {
     var i;
     for (i = 0; i < pipelinesAmount; i++) {
-      console.log(i);
       this.numbers.push(i);
     }
     this.template.querySelector("c-pipeline-column").handleColumn(this.numbers);
